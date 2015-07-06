@@ -1,0 +1,49 @@
+{
+  "name": "angular-live-set-example",
+  "version": "1.0.0",
+  "main": "server/server.js",
+  "scripts": {
+    "pretest": "jshint ."
+  },
+  "dependencies": {
+    "compression": "^1.0.3",
+    "cors": "^2.5.2",
+    "errorhandler": "^1.1.1",
+    "express": "^4.13.0",
+    "gulp-bower": "0.0.10",
+    "loopback": "^2.14.0",
+    "loopback-boot": "^2.6.5",
+    "loopback-datasource-juggler": "^2.19.0",
+    "serve-favicon": "^2.0.1"
+  },
+  "optionalDependencies": {
+    "loopback-explorer": "^1.1.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-angular-filesort": "^1.1.1",
+    "gulp-bower-files": "^0.2.7",
+    "gulp-clean": "^0.3.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-debug": "^2.0.1",
+    "gulp-foreach": "^0.1.0",
+    "gulp-inject": "^1.3.1",
+    "gulp-jshint": "^1.11.1",
+    "gulp-less": "^3.0.3",
+    "gulp-livereload": "^3.8.0",
+    "gulp-loopback-sdk-angular": "^0.1.3",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-spawn-mocha": "^2.2.1",
+    "gulp-watch": "^4.2.4",
+    "gulp-wrap": "^0.11.0",
+    "jshint": "^2.5.6",
+    "main-bower-files": "^2.8.2",
+    "ordered-merge-stream": "0.0.0"
+  },
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "description": "angular-live-set-example"
+}
