@@ -31,6 +31,7 @@ gulp.task('clean', function() {
 
 gulp.task('build', [
   'js',
+  'gen-app',
   'less',
   'templates',
   'index'
@@ -45,10 +46,14 @@ gulp.task('templates', function() {
     .pipe(gulp.dest(DEST + '/modules'));
 });
 
+var angularModules = [];
+
 gulp.task('angular-modules', function() {
   return gulp.src(SRC + '/modules/*/**/*.js')
     .pipe(foreach(function(stream, file){
       var moduleData = parseModuleDataFromFile(file);
+
+      angularModules.push(moduleData);
 
       return stream
         .pipe(wrap(
@@ -74,15 +79,55 @@ function parseModuleDataFromFile(file) {
   var filename = path.basename(file.path).replace('.js', '');
   var moduleName = filename.split('.')[0];
 
+  var types = ['controller', 'directive', 'factory', 'service'];
+  var type;
+
+  types.forEach(function(t) {
+    if(filename.indexOf('.' + t) > -1) {
+      type = t;
+    }
+  });
+
+  var dependencies;
+
   return {
     jsName: moduleName,
     name: moduleName,
     namespace: dir,
     inject: inject,
-    type: 'controller',
-    src: contents
+    type: type,
+    src: contents,
+    dependencies: dependencies || []
   };
 }
+
+// generate the app module
+gulp.task('gen-app', ['angular-modules'], function() {
+  var dependencies = [];
+
+  angularModules.forEach(function(mod) {
+    if(dependencies.indexOf(mod.namespace) === -1) {
+      dependencies.push(mod.namespace);
+    }
+  });
+
+  var appModuleData = {
+    jsName: 'app',
+    namespace: 'app',
+    type: 'module',
+    inject: [],
+    src: '',
+    dependencies: dependencies
+  };
+
+  gulp.src(SRC + '/modules/app.js')
+   .pipe(wrap(
+      {src: SRC + '/modules/module-template.js'},
+      appModuleData,
+      {variable: 'module'}
+    ))
+   .pipe(gulp.dest(DEST + '/modules/app'));
+});
 
 gulp.task('js', ['angular-modules'], function() {
   // copy the files
@@ -103,7 +148,7 @@ gulp.task('head', function() {
 gulp.task('foot', ['bower'], function() {
   // vendor js files
   var vendor = gulp.src('vendor/*.js', {cwd: DEST, base: 'vendor'})
-    .pipe(debug({title: 'vendor'}))
+    .pipe(debug({title: 'vendor'}));
 
   // js files in angular order
   var js = gulp
