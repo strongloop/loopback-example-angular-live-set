@@ -31,5 +31,13 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "Color": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Circle": {
+    "dataSource": "db",
+    "public": true
   }
 }

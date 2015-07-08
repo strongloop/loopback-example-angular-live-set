@@ -1,6 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var gulp = require('gulp');
+var strUtil = require('underscore.string');
 var mainBowerFiles = require('main-bower-files');
 var watch = require('gulp-watch');
 var jshint = require('gulp-jshint');
@@ -18,6 +19,7 @@ var debug = require('gulp-debug');
 var concat = require('gulp-concat');
 var wrap = require("gulp-wrap");
 var merge = require('ordered-merge-stream');
+var loopbackAngular = require('gulp-loopback-sdk-angular');
 
 var SRC = 'client';
 var DEST = 'dist';
@@ -31,14 +33,16 @@ gulp.task('clean', function() {
 
 gulp.task('build', [
   'js',
+  'lb-angular',
   'gen-app',
   'less',
   'templates',
-  'index'
+  'index',
+  'debug'
 ]);
 
 gulp.task('bower', function() {
-  gulp.src(mainBowerFiles()).pipe(gulp.dest(DEST + '/vendor'));
+  return gulp.src(mainBowerFiles()).pipe(gulp.dest(DEST + '/vendor'));
 });
 
 gulp.task('templates', function() {
@@ -65,8 +69,7 @@ gulp.task('angular-modules', function() {
     .pipe(gulp.dest(TMP + '/modules'));
 });
 
-function parseModuleDataFromFile(file) {
-  var contents = file._contents.toString();
+function parseInjectAttrs(contents) {
   var re = /@inject\s+([a-zA-Z_$|0-9a-zA-Z_$]+)/gi;
   var match;
   var inject = [];
@@ -74,6 +77,26 @@ function parseModuleDataFromFile(file) {
   while(match = re.exec(contents)) {
     inject.push(match[1]);
   }
+
+  return inject;
+}
+
+function parseDepAttrs(contents) {
+  var re = /@dep\s+(\S+)/gi;
+  var match;
+  var deps = [];
+
+  while(match = re.exec(contents)) {
+    deps.push(match[1]);
+  }
+
+  return deps;
+}
+
+function parseModuleDataFromFile(file) {
+  var contents = file._contents.toString();
+  var inject = parseInjectAttrs(contents);
+  var dependencies = parseDepAttrs(contents);
 
   var dir = path.basename(path.dirname(file.path));
   var filename = path.basename(file.path).replace('.js', '');
@@ -88,12 +111,13 @@ function parseModuleDataFromFile(file) {
     }
   });
 
-  var dependencies;
+  var jsName = strUtil.camelize(moduleName);
 
   return {
-    jsName: moduleName,
+    jsName: jsName,
     name: moduleName,
     namespace: dir,
+    name: dir + '.' + jsName,
     inject: inject,
     type: type,
     src: contents,
@@ -106,14 +130,15 @@ gulp.task('gen-app', ['angular-modules'], function() {
   var dependencies = [];
 
   angularModules.forEach(function(mod) {
-    if(dependencies.indexOf(mod.namespace) === -1) {
-      dependencies.push(mod.namespace);
+    console.log(mod);
+    if(dependencies.indexOf(mod.name) === -1) {
+      dependencies.push(mod.name);
     }
   });
 
   var appModuleData = {
     jsName: 'app',
-    namespace: 'app',
+    name: 'app',
     type: 'module',
     inject: [],
     src: '',
@@ -184,16 +209,17 @@ gulp.task('less', function() {
 
 gulp.task('watch', function() {
   livereload.listen();
-  return gulp.watch([lessFiles, SRC + '/**.js', SRC + '/**.html'], ['build']);
+  return gulp.watch([lessFiles, SRC + '/**/*.js', SRC + '/**/*.html'], ['build']);
 });
 
 gulp.task('serve', [
   'build',
-  'debug',
   'watch'
 ], function(cb) {
+  // for demonstration purposes only...
   var express = require('express');
   var app = express();
+  app.use(require('./server/server'));
   app.use(express.static(DEST));
   app.listen(3000, cb);
 });
@@ -204,7 +230,7 @@ gulp.task('modules', function() {
     .pipe(wrap({src: SRC + '/example.html'}))
     .pipe(concat('modules.html'))
     .pipe(gulp.dest(TMP))
-    .pipe(debug());
+    .pipe(livereload());
 });
 
 // build the debug page
@@ -215,4 +241,12 @@ gulp.task('debug', [
     .pipe(concat('debug.html'))
     .pipe(gulp.dest(DEST))
     .pipe(livereload());
+});
+
+// loopback services
+gulp.task('lb-angular', function() {
+  gulp.src('server/server.js')
+    .pipe(loopbackAngular())
+    .pipe(rename('lb-services.js'))
+    .pipe(gulp.dest(TMP + '/modules/lb-services'));
 });

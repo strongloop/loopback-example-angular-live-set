@@ -13,6 +13,8 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.4.1"
+    "angular": "~1.4.1",
+    "angular-live-set": "*",
+    "angular-resource": "~1.4.2"
   }
 }

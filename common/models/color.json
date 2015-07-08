@@ -1,0 +1,21 @@
+{
+  "name": "Color",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "val": {
+      "type": "string",
+      "required": true
+    },
+    "votes": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

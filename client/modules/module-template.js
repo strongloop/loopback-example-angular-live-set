@@ -1,24 +1,28 @@
 (function() {
-var <%= module.jsName %>;
+var module;
 
 
 try {
-  <%= module.jsName %> = angular.module('<%= module.namespace %>');
+  module = angular.module('<%= module.name %>');
 } catch(e) {
   // ignore...
 }
 
-if(!<%= module.jsName %>) {
-  <%= module.jsName %> = angular.module('<%= module.namespace %>', <%= JSON.stringify(module.dependencies) %>)
+if(!module) {
+  module = angular.module('<%= module.name %>', <%= JSON.stringify(module.dependencies) %>)
 }
 
-<%= module.jsName %>
+module
 <% if(module.type !== 'module') { %>
-.<%= module.type %>('<%= module.name %>',
-function(<%= module.inject %>) {
-<%= module.src %>
-})
+.<%= module.type %>('<%= module.jsName %>', <%= module.jsName %>)
 <% } %>;
 
 <%= module.jsName %>.$inject = <%= JSON.stringify(module.inject) %>;
+
+function <%= module.jsName %>(<%= module.inject %>) {
+
+<%= module.src %>
+
+}
+
 })();
