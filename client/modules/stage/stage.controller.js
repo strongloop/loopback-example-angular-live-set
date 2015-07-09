@@ -12,4 +12,4 @@ $scope.examples = [{
   name: 'chart',
   txt: 'Streaming Chart'
 }];
-$scope.example = 'colors';
+$scope.example = 'circles';
