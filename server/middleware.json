@@ -1,0 +1,15 @@
+{
+  "session": {
+  },
+  "auth": {
+  },
+  "parse": {
+  },
+  "routes": {
+  },
+  "files": {
+  },
+  "final:after": {
+    "errorhandler": {}
+  }
+}

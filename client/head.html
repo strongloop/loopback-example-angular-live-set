@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+  <title>Angular Live Set Example</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- inject:css -->
+  <!-- endinject -->
+</head>
+<div class="stage" ng-controller="stage">
+  <h4>Choose an example</h4>
+  <button ng-repeat="ex in examples"
+    ng-click="$parent.example = ex.name"
+    ng-class="{selected: $parent.example === ex.name}">{{ex.txt}}</button>

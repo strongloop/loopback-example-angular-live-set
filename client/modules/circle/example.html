@@ -1,0 +1,16 @@
+<div ng-if="example === 'circles'">
+  <h3>Click to draw in the canvas below</h3>
+  <div class="circles" ng-controller="circle">
+    <svg ng-attr-height="{{stage.h}}" ng-attr-width="{{stage.w}}"
+      ng-mousedown="drawing = true"
+      ng-mouseup="drawing = false"
+      ng-mousemove="draw($event)">
+        <circle
+            ng-repeat="circle in circles"
+            ng-attr-cx="{{circle.x}}"
+            ng-attr-cy="{{circle.y}}"
+            ng-attr-r= "{{circle.r}}">
+        </circle>
+    </svg>
+  </div>
+</div>

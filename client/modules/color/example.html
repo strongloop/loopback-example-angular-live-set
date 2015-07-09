@@ -1,0 +1,12 @@
+<div ng-if="example === 'colors'">
+  <div class="colors" ng-controller="colorList">
+    <h4 ng-if="colors.length === 0">Create a color!</h4>
+    <h4 ng-if="colors.length">Click a color to vote for it!</h4>
+    <color ng-repeat="color in colors | orderBy:'-votes'"></color>
+    <form ui-keypress="{13:'createColor()'}">
+      <strong>Enter a color name (eg. green, blue, orange):</strong>
+      <input type="text" ng-model="newColor" />
+      <button ng-click="createColor()">Create</button>
+    </form>
+  </div>
+</div>

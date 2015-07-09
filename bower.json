@@ -1,0 +1,24 @@
+{
+  "name": "angular-live-set-example",
+  "version": "0.0.0",
+  "authors": [
+    "Ritchie Martori <skawful@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.1",
+    "angular-live-set": "*",
+    "angular-resource": "~1.4.2",
+    "angularjs-nvd3-directives": "~0.0.7"
+  },
+  "resolutions": {
+    "d3": "~3.3.13"
+  }
+}
