@@ -37,8 +37,7 @@ gulp.task('build', [
   'gen-app',
   'less',
   'templates',
-  'index',
-  'debug'
+  'index'
 ]);
 
 gulp.task('bower', function() {
@@ -130,7 +129,6 @@ gulp.task('gen-app', ['angular-modules'], function() {
   var dependencies = [];
 
   angularModules.forEach(function(mod) {
-    console.log(mod);
     if(dependencies.indexOf(mod.name) === -1) {
       dependencies.push(mod.name);
     }
@@ -165,8 +163,11 @@ gulp.task('head', function() {
   var src = gulp
     .src('css/**/*.css', {cwd: DEST, base: 'css'});
 
+  var vsrc = gulp
+    .src('vendor/*.css', {cwd: DEST, base: 'vendor'});
+
   return gulp.src(SRC + '/head.html')
-    .pipe(inject(src))
+    .pipe(inject(merge([src, vsrc])))
     .pipe(gulp.dest(TMP));
 });
 
@@ -189,16 +190,16 @@ gulp.task('foot', ['bower'], function() {
     .pipe(gulp.dest(TMP));
 });
 
-gulp.task('index', [
-  'head',
-  'foot'
-], function() {
-  return gulp.src([TMP + '/head.html', SRC + '/index.html', TMP + '/foot.html'])
-    .pipe(debug({title: 'concat'}))
-    .pipe(concat('index.html'))
-    .pipe(gulp.dest(DEST))
-    .pipe(livereload());
-});
+// gulp.task('index', [
+//   'head',
+//   'foot'
+// ], function() {
+//   return gulp.src([TMP + '/head.html', SRC + '/index.html', TMP + '/foot.html'])
+//     .pipe(debug({title: 'concat'}))
+//     .pipe(concat('index.html'))
+//     .pipe(gulp.dest(DEST))
+//     .pipe(livereload());
+// });
 
 gulp.task('less', function() {
   return gulp.src(lessFiles)
@@ -227,18 +228,21 @@ gulp.task('serve', [
 gulp.task('modules', function() {
   return gulp
     .src(SRC + '/modules/*/example.html')
-    .pipe(wrap({src: SRC + '/example.html'}))
+    .pipe(wrap(
+      {src: SRC + '/example.html'}
+    ))
     .pipe(concat('modules.html'))
     .pipe(gulp.dest(TMP))
     .pipe(livereload());
 });
 
-// build the debug page
-gulp.task('debug', [
+gulp.task('index', [
+  'head',
+  'foot',
   'modules'
 ], function() {
   return gulp.src([TMP + '/head.html', TMP + '/modules.html', TMP + '/foot.html'])
-    .pipe(concat('debug.html'))
+    .pipe(concat('index.html'))
     .pipe(gulp.dest(DEST))
     .pipe(livereload());
 });

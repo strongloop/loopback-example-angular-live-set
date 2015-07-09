@@ -8,7 +8,7 @@
  * @dep lbServices
  */
 
-var src = new EventSource('/api/circles/subscription?_format=event-source');
+var src = new EventSource('/api/circles/change-stream?_format=event-source');
 var changes = createChangeStream(src);
 var set;
 
@@ -23,8 +23,8 @@ Circle.find().$promise.then(function(circles) {
 $scope.draw = function(e) {
   if($scope.drawing) {
     Circle.create({
-      x: e.clientX,
-      y: e.clientY,
+      x: e.offsetX,
+      y: e.offsetY,
       r: Math.floor(10 * Math.random())
     });
   }

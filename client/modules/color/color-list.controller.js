@@ -8,7 +8,7 @@
  * @dep lbServices
  */
 
-var src = new EventSource('/api/colors/subscription?_format=event-source');
+var src = new EventSource('/api/colors/change-stream?_format=event-source');
 var changes = createChangeStream(src);
 var set;
 

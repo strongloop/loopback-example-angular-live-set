@@ -1,0 +1,22 @@
+<div ng-if="example === 'chart'">
+  <h4>
+    Click the chart below to view
+    the node.js server's memory usage.
+  </h4>
+  <div class="chart" ng-controller="chart">
+    <button ng-show="!paused" ng-click="paused = true;">Pause</button>
+    <button ng-show="paused" ng-click="paused = false;">Play</button>
+    <nvd3-stacked-area-chart
+          data="data"
+          id="exampleId"
+          tooltips="true"
+          showXAxis="true"
+          showYAxis="true"
+          width="550"
+          height="350"
+          objectequality="true"
+          transitionDuration="0"
+          interactive="false">
+      </nvd3-stacked-area-chart>
+  </div>
+</div>

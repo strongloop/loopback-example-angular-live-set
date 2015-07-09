@@ -39,5 +39,9 @@
   "Circle": {
     "dataSource": "db",
     "public": true
+  },
+  "Process": {
+    "dataSource": "db",
+    "public": true
   }
 }

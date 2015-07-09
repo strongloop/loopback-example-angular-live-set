@@ -1,8 +1,10 @@
 # Angular Live Set: Example
 
-## Notes
+## What is LiveSet?
 
-The following steps were taken to create this example:
+[LiveSet](https://github.com/strongloop/angular-live-set) is an angular module that allows you to display an always up to date collection of objects.
+
+## Creating the Colors Example
 
 **Step 1: Dependencies**
 
@@ -135,3 +137,21 @@ made on the server, the change will be made to your `LiveSet`.
 
 `EventSource` is not available in all browsers. However, there are [several
 polyfills available](http://bower.io/search/?q=eventsource).
+
+## Run the Examples
+
+Install the dependencies:
+
+```
+npm install && bower install
+# make sure you have gulp installed globally... or
+npm install gulp -g
+```
+
+Build and run the example:
+
+```
+gulp serve
+```
+
+Open two separate browser windows and navigate to `http://localhost:3000` in both.

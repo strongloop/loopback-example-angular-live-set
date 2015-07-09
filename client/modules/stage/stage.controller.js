@@ -2,4 +2,14 @@
  * @inject $scope
  */
 
-$scope.foo = 'bar';
+$scope.examples = [{
+  name: 'colors',
+  txt: 'Favorite Colors'
+},{
+  name: 'circles',
+  txt: 'Live Draw'
+},{
+  name: 'chart',
+  txt: 'Streaming Chart'
+}];
+$scope.example = 'colors';
