@@ -6,6 +6,57 @@
 
 ![gif](https://cloud.githubusercontent.com/assets/462228/8607451/bf46c74c-2647-11e5-9a72-f458a304ecd1.gif)
 
+## Lets see the code!
+
+**Favorite Colors**
+
+This is a snippet from the [colors example](https://github.com/strongloop/angular-live-set-example/blob/feature/init/client/modules/color/color-list.controller.js) that demonstrates a basic
+`LiveSet`.
+
+```js
+var src = new EventSource('/api/colors/change-stream');
+var changes = createChangeStream(src);
+var set;
+
+Color.find().$promise.then(function(results) {
+  set = new LiveSet(results, changes);
+  $scope.colors = set.toLiveArray();
+});
+```
+
+**Live Drawing**
+
+The drawing example creates a `LiveSet` in a similar way. The rest of the controller is fairly simple and similar to the snippet above.
+
+The draw method uses a service provided by the [loopback-angular-sdk](http://docs.strongloop.com/display/LB/AngularJS+JavaScript+SDK) to create additional points in the drawing. This data is streamed to other browser clients.
+
+```js
+$scope.draw = function(e) {
+  if($scope.drawing) {
+    Circle.create({
+      x: e.offsetX,
+      y: e.offsetY,
+      r: Math.floor(10 * Math.random())
+    });
+  }
+}
+```
+
+**Streaming Chart**
+
+The streaming chart does not use the `LiveSet` class at all. It demonstrates how to stream data from the server to a client.
+
+```js
+var src = new EventSource('/api/process/memory');
+var changes = createChangeStream(src);
+
+changes.on('data', function(update) {
+  // add the new data to the chart
+});
+```
+
+See the entire chart example code [here](https://github.com/strongloop/angular-live-set-example/tree/feature/init/client/modules/chart).
+
 ## Creating the Colors Example
 
 **Step 1: Dependencies**
