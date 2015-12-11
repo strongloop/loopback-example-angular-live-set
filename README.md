@@ -201,6 +201,13 @@ npm install && bower install
 npm install gulp -g
 ```
 
+Event streams don't work with Node compression. To disable compression, delete the entry from `server/middleware.json` so it looks like this:
+...
+"compression": {
+  "enabled":false
+},
+...
+
 Build and run the example:
 
 ```
