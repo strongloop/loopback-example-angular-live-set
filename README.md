@@ -217,3 +217,7 @@ gulp serve
 ```
 
 Open two separate browser windows and navigate to `http://localhost:3000` in both.
+
+---
+
+[More LoopBack examples](https://github.com/strongloop/loopback-example)
