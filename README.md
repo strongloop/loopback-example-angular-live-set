@@ -2,7 +2,7 @@
 
 ## What is LiveSet?
 
-[LiveSet](https://github.com/strongloop/angular-live-set) is an angular module that allows you to display an always up to date collection of objects.
+[LiveSet](https://github.com/strongloop/loopback-example-angular-live-set) is an angular module that allows you to display an always up to date collection of objects.
 
 ![gif](https://cloud.githubusercontent.com/assets/462228/8607451/bf46c74c-2647-11e5-9a72-f458a304ecd1.gif)
 
@@ -10,7 +10,7 @@
 
 **Favorite Colors**
 
-This is a snippet from the [colors example](https://github.com/strongloop/angular-live-set-example/blob/feature/init/client/modules/color/color-list.controller.js) that demonstrates a basic
+This is a snippet from the [colors example](https://github.com/strongloop/loopback-example-angular-live-set/blob/master/client/modules/color/color-list.controller.js) that demonstrates a basic
 `LiveSet`.
 
 ```js
@@ -55,7 +55,7 @@ changes.on('data', function(update) {
 });
 ```
 
-See the entire chart example code [here](https://github.com/strongloop/angular-live-set-example/tree/feature/init/client/modules/chart).
+See the entire chart example code [here](https://github.com/strongloop/loopback-example-angular-live-set/tree/master/client/modules/chart).
 
 ## Creating the Colors Example
 
