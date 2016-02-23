@@ -10,7 +10,7 @@
 
 **Favorite Colors**
 
-This is a snippet from the [colors example](https://github.com/strongloop/loopback-example-angular-live-set/blob/master/client/modules/color/color-list.controller.js) that demonstrates a basic
+This is a snippet from the [colors example](client/modules/color/color-list.controller.js) that demonstrates a basic
 `LiveSet`.
 
 ```js
@@ -55,7 +55,7 @@ changes.on('data', function(update) {
 });
 ```
 
-See the entire chart example code [here](https://github.com/strongloop/loopback-example-angular-live-set/tree/master/client/modules/chart).
+See the entire chart example code [here](client/modules/chart).
 
 ## Creating the Colors Example
 
