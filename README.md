@@ -2,7 +2,7 @@
 
 ## What is LiveSet?
 
-[LiveSet](https://github.com/strongloop/loopback-example-angular-live-set) is an angular module that allows you to display an always up to date collection of objects.
+[LiveSet](https://github.com/strongloop/angular-live-set) is an angular module that allows you to display an always up to date collection of objects.
 
 ![gif](https://cloud.githubusercontent.com/assets/462228/8607451/bf46c74c-2647-11e5-9a72-f458a304ecd1.gif)
 
