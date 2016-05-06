@@ -45,5 +45,6 @@
     "type": "",
     "url": ""
   },
-  "description": "angular-live-set-example"
+  "description": "angular-live-set-example",
+  "license": "MIT"
 }
