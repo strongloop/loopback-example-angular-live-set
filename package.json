@@ -12,11 +12,12 @@
     "express": "^4.13.0",
     "gulp-bower": "0.0.10",
     "gulp-loopback-sdk-angular": "^0.1.3",
-    "loopback": "^2.14.0",
+    "loopback": "^3.0.0",
     "loopback-boot": "^2.6.5",
+    "loopback-component-explorer": "^2.1.0",
     "loopback-datasource-juggler": "^2.19.0",
     "serve-favicon": "^2.0.1",
-    "loopback-component-explorer": "^2.1.0"
+    "strong-error-handler": "^1.1.1"
   },
   "devDependencies": {
     "gulp": "^3.9.0",
