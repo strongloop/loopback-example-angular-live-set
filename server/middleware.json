@@ -13,6 +13,6 @@
   "files": {
   },
   "final:after": {
-    "errorhandler": {}
+    "strong-error-handler": {}
   }
 }
