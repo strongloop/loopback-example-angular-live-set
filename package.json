@@ -11,7 +11,7 @@
     "errorhandler": "^1.1.1",
     "express": "^4.13.0",
     "gulp-bower": "0.0.10",
-    "gulp-loopback-sdk-angular": "^0.1.3",
+    "gulp-loopback-sdk-angular": "^0.2.0",
     "loopback": "^3.0.0",
     "loopback-boot": "^2.6.5",
     "loopback-component-explorer": "^2.1.0",
