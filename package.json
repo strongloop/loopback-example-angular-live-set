@@ -47,5 +47,6 @@
     "url": ""
   },
   "description": "angular-live-set-example",
-  "license": "MIT"
+  "license": "MIT",
+  "author": "IBM Corp."
 }
